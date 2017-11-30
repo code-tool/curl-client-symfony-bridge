@@ -1,0 +1,18 @@
+{
+  "name": "code-tool/curl-client-symfony-bridge",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Http\\Client\\Curl\\Symfony\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^5.6 | ^7.1",
+    "code-tool/curl-client": "@stable"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "@stable"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
