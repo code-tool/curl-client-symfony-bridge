@@ -3,13 +3,26 @@ parameters:
 services:
   curl.channel.builder:
     class: Http\Client\Curl\Channel\Builder\CurlChannelBuilder
+
   http.message.factory.slim:
     class: Http\Message\MessageFactory\SlimMessageFactory
-  http.message.factory: '@http.message.factory.slim'
-  http.response.factory: '@http.message.factory'
-  http.request.factory: '@http.message.factory'
   http.response.factory.slim: '@http.message.factory.slim'
   http.request.factory.slim: '@http.message.factory.slim'
+
+  http.message.factory.guzzle:
+    class: Http\Message\MessageFactory\GuzzleMessageFactory
+  http.response.factory.guzzle: '@http.message.factory.guzzle'
+  http.request.factory.guzzle: '@http.message.factory.guzzle'
+
+  http.message.factory.diactoros:
+    class: Http\Message\MessageFactory\DiactorosMessageFactory
+  http.response.factory.diactoros: '@http.message.factory.diactoros'
+  http.request.factory.diactoros: '@http.message.factory.diactoros'
+
+  http.message.factory: '@http.message.factory.slim'
+  http.response.factory: '@http.message.factory.slim'
+  http.request.factory: '@http.message.factory.slim'
+
   http.client.curl:
     class: Http\Client\Curl\CurlClient
     arguments: ['@curl.channel.builder', '@http.response.factory', '%curl.options%']
