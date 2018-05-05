@@ -24,7 +24,7 @@ class CurlClientExtension extends Extension
         foreach (['http.message.factory', 'http.response.factory', 'http.request.factory'] as $definition) {
             $adapter = $config['adapter'];
             $id = sprintf('%s.%s', $definition, $adapter);
-            if (false === $container->hasDefinition($id)) {
+            if (false === $container->has($id)) {
                 throw new \LogicException(
                     sprintf('No definition %s for adapter %s, looking for %s', $definition, $adapter, $id)
                 );
