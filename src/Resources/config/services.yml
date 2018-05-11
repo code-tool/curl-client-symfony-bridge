@@ -4,6 +4,10 @@ services:
   curl.channel.builder:
     class: Http\Client\Curl\Channel\Builder\CurlChannelBuilder
 
+  curl.request.builder:
+    class: Http\Client\Curl\Request\Builder\RequestBuilder
+    arguments: ['@http.request.factory']
+
   http.message.factory.slim:
     class: Http\Message\MessageFactory\SlimMessageFactory
   http.response.factory.slim: '@http.message.factory.slim'
