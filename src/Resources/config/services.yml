@@ -6,24 +6,31 @@ services:
 
   curl.request.builder:
     class: Http\Client\Curl\Request\Builder\RequestBuilder
-    arguments: ['@http.request.factory']
-
+    shared: false
+    arguments: ['@http.uri.factory', '@http.request.factory']
   http.message.factory.slim:
     class: Http\Message\MessageFactory\SlimMessageFactory
+  http.uri.factory.slim:
+    class: Http\Message\UriFactory\SlimUriFactory
   http.response.factory.slim: '@http.message.factory.slim'
   http.request.factory.slim: '@http.message.factory.slim'
 
   http.message.factory.guzzle:
     class: Http\Message\MessageFactory\GuzzleMessageFactory
+  http.uri.factory.guzzle:
+    class: Http\Message\UriFactory\GuzzleUriFactory
   http.response.factory.guzzle: '@http.message.factory.guzzle'
   http.request.factory.guzzle: '@http.message.factory.guzzle'
 
   http.message.factory.diactoros:
     class: Http\Message\MessageFactory\DiactorosMessageFactory
+  http.uri.factory.diactoros:
+    class: Http\Message\UriFactory\DiactorosUriFactory
   http.response.factory.diactoros: '@http.message.factory.diactoros'
   http.request.factory.diactoros: '@http.message.factory.diactoros'
 
   http.message.factory: '@http.message.factory.slim'
+  http.uri.factory: '@http.uri.factory.slim'
   http.response.factory: '@http.message.factory.slim'
   http.request.factory: '@http.message.factory.slim'
 
