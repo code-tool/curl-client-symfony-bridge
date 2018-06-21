@@ -6,6 +6,7 @@ services:
 
   curl.request.builder:
     class: Http\Client\Curl\Request\Builder\RequestBuilder
+    shared: false
     arguments: ['@http.request.factory']
 
   http.message.factory.slim:
