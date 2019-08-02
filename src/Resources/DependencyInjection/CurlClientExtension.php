@@ -14,14 +14,19 @@ class CurlClientExtension extends Extension
     {
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
-
         $loader = new YamlFileLoader(
             $container,
             new FileLocator(__DIR__ . '/../config')
         );
         $loader->load('services.yml');
-
-        foreach (['http.message.factory', 'http.response.factory', 'http.request.factory'] as $definition) {
+        foreach ([
+                     'http.request.factory',
+                     'http.response.factory',
+                     'http.server.factory',
+                     'http.stream.factory',
+                     'http.file.factory',
+                     'http.uri.factory',
+                 ] as $definition) {
             $adapter = $config['adapter'];
             $id = sprintf('%s.%s', $definition, $adapter);
             if (false === $container->has($id)) {
