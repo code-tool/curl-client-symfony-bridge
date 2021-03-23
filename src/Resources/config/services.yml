@@ -3,37 +3,30 @@ parameters:
 services:
   curl.channel.builder:
     class: Http\Client\Curl\Channel\Builder\CurlChannelBuilder
-
   curl.request.builder:
     class: Http\Client\Curl\Request\Builder\RequestBuilder
     shared: false
-    arguments: ['@http.uri.factory', '@http.request.factory']
-  http.message.factory.slim:
-    class: Http\Message\MessageFactory\SlimMessageFactory
+    arguments: ['@http.stream.factory', '@http.request.factory']
+  http.request.factory.slim:
+    class: Slim\Psr7\Factory\RequestFactory
+    arguments: ['@http.stream.factory', '@http.uri.factory']
+  http.response.factory.slim:
+    class: Slim\Psr7\Factory\ResponseFactory
+  http.server.factory.slim:
+    class: Slim\Psr7\Factory\ServerRequestFactory
+    arguments: ['@http.stream.factory', '@http.uri.factory']
+  http.stream.factory.slim:
+    class: Slim\Psr7\Factory\StreamFactory
+  http.file.factory.slim:
+    class: Slim\Psr7\Factory\UploadedFileFactory
   http.uri.factory.slim:
-    class: Http\Message\UriFactory\SlimUriFactory
-  http.response.factory.slim: '@http.message.factory.slim'
-  http.request.factory.slim: '@http.message.factory.slim'
-
-  http.message.factory.guzzle:
-    class: Http\Message\MessageFactory\GuzzleMessageFactory
-  http.uri.factory.guzzle:
-    class: Http\Message\UriFactory\GuzzleUriFactory
-  http.response.factory.guzzle: '@http.message.factory.guzzle'
-  http.request.factory.guzzle: '@http.message.factory.guzzle'
-
-  http.message.factory.diactoros:
-    class: Http\Message\MessageFactory\DiactorosMessageFactory
-  http.uri.factory.diactoros:
-    class: Http\Message\UriFactory\DiactorosUriFactory
-  http.response.factory.diactoros: '@http.message.factory.diactoros'
-  http.request.factory.diactoros: '@http.message.factory.diactoros'
-
-  http.message.factory: '@http.message.factory.slim'
+    class: Slim\Psr7\Factory\UriFactory
+  http.request.factory: '@http.request.factory.slim'
+  http.response.factory: '@http.response.factory.slim'
+  http.server.factory: '@http.server.factory.slim'
+  http.stream.factory: '@http.stream.factory.slim'
+  http.file.factory: '@http.file.factory.slim'
   http.uri.factory: '@http.uri.factory.slim'
-  http.response.factory: '@http.message.factory.slim'
-  http.request.factory: '@http.message.factory.slim'
-
   http.client.curl:
     class: Http\Client\Curl\CurlClient
     arguments: ['@curl.channel.builder', '@http.response.factory', '%curl.options%']
