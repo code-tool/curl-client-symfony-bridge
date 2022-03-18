@@ -9,9 +9,9 @@
   "require": {
     "php": "^7.1 || ^8.0",
     "code-tool/curl-client": "^5.1",
-    "symfony/config": "^3.4 || ^4 || ^5",
-    "symfony/http-kernel": "^3.4 || ^4 || ^5",
-    "symfony/dependency-injection": "^3.4 || ^4.1.12 || ^5",
+    "symfony/config": "^3.4 || ^4 || ^5 || ^6",
+    "symfony/http-kernel": "^3.4 || ^4 || ^5 || ^6",
+    "symfony/dependency-injection": "^3.4 || ^4.1.12 || ^5 || ^6",
     "slim/psr7": "^1.0"
   },
   "require-dev": {
